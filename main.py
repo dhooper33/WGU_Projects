@@ -1,6 +1,7 @@
 #Devon Hooper Student ID #: 
 
 from package_data_reader import get_hash_map
+from package_data_reader import number_of_packages
 import packages
 import datetime
 
@@ -80,7 +81,7 @@ while user_input != 'exit':
     #has a comoplexity of O(n)
     elif user_input == '2':
         try:
-            count = input('Enter a package ID: ')
+            count = input(f'Enter a package ID(1 - {number_of_packages()}): ')
             departure_time = get_hash_map().get(str(count))[9]
             package_status = get_hash_map().get(str(count))[10]
             user_time_input = input('Enter the time you would like to check in the format HH:MM:SS: ')

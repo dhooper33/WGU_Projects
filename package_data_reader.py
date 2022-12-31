@@ -1,11 +1,11 @@
 import csv
-from hash_table import HashMap
+import hash_table
 
 # Read CSV files
 with open('./delivery_data/WGUPSpackage_data.csv') as packagefile:
     package_data = csv.reader(packagefile, delimiter=',')
 
-    package_map = HashMap()  # Create an instance of HashMap class
+    package_map = hash_table.HashMap()  # Create an instance of HashMap class
     first_truck = []  # first truck delivery
     second_truck = [] # second truck delivery
     last_truck = [] # final truck delivery
@@ -72,4 +72,8 @@ with open('./delivery_data/WGUPSpackage_data.csv') as packagefile:
     def get_hash_map():
         return package_map
 
+    def number_of_packages():
+        total_packages = len(first_truck) + len(second_truck) + len(last_truck)
+        return (total_packages)
 
+    
