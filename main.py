@@ -116,6 +116,8 @@ while user_input != 'exit':
                         f'Package ID: {get_hash_map().get(str(count))[0]}\n'
                         f'Street address: {get_hash_map().get(str(count))[2]}\n'
                         f'Required delivery time: {get_hash_map().get(str(count))[6]}\n'
+                        f'Delivery City: {get_hash_map().get(str(count))[3]}\n'
+                        f'Delivery Zipcode: {get_hash_map().get(str(count))[5]}\n'
                         f'Package weight: {get_hash_map().get(str(count))[7]}\n'                        
                         f'Truck status: {get_hash_map().get(str(count))[9]}\n'
                         f'Delivery status: {get_hash_map().get(str(count))[10]}\n'
@@ -123,12 +125,14 @@ while user_input != 'exit':
                 #determine if package has already been delivered
                 else:
                     get_hash_map().get(str(count))[10] = 'Package was delivered at ' + package_status
-                    get_hash_map().get(str(count))[9] = 'Pakcage left the hub at ' + departure_time
+                    get_hash_map().get(str(count))[9] = 'Package left the hub at ' + departure_time
 
                     print(
                         f'Package ID: {get_hash_map().get(str(count))[0]}\n'
                         f'Street address: {get_hash_map().get(str(count))[2]}\n'
                         f'Required delivery time: {get_hash_map().get(str(count))[6]}\n'
+                        f'Delivery City: {get_hash_map().get(str(count))[3]}\n'
+                        f'Delivery Zipcode: {get_hash_map().get(str(count))[5]}\n'
                         f'Package weight: {get_hash_map().get(str(count))[7]}\n'                        
                         f'Truck status: {get_hash_map().get(str(count))[9]}\n'
                         f'Delivery status: {get_hash_map().get(str(count))[10]}\n'
