@@ -6,15 +6,17 @@ class HashTableEntry:
 class HashMap:
         def __init__(self, initial_capacity=10):
         # initialize the hash table with empty bucket list entries.
+        # O(1)
                 self.map = []
                 for i in range(initial_capacity):
                         self.map.append([])
 		
+        # O(1)
         def create_hash(self, key):
                 bucket = int(key) % len(self.map)
                 return bucket
 
-		
+	# O(N)	
         def add(self, key, value):
                 key_hash = self.create_hash(key)
                 key_value = [key, value]
@@ -29,7 +31,7 @@ class HashMap:
                                         return True
                         self.map[key_hash].append(key_value)
                         return True
-			
+	# O(N)		
         def get(self, key):
                 key_hash = self.create_hash(key)
                 if self.map[key_hash] is not None:
@@ -37,7 +39,7 @@ class HashMap:
                                 if pair[0] == key:
                                         return pair[1]
                 return None
-			
+	# O(N)		
         def remove(self, key):
                 key_hash = self.create_hash(key)
 		
@@ -48,7 +50,7 @@ class HashMap:
                                 self.map[key_hash].pop(i)
                                 return True
                 return False
-	
+	# O(1)
         def update(self, key, value):
                 key_hash = self.create_hash(key)
                 if self.map[key_hash] is not None:

@@ -22,7 +22,7 @@ for idx, value in enumerate(package_data_reader.get_first_delivery()):
 
 
 # this for loop compares the addresses on truck one to the list of addresses and adds the address index to the list
-# Space-time complexity is O(N^2)
+# O(N^2)
 try:
     first_count = 0
     for k in first_delivery:
@@ -38,7 +38,7 @@ distance.evaluate_shortest_distance(first_delivery, 1, 0)
 first_truck_total_distance = 0
 
 # this for loop takes the values in the first truck and runs them through the distance functions in the Distances.py file
-# Space-time complexity is O(N)
+# O(N)
 first_truck_package_id = 0
 for index in range(len(distance.first_truck_index())):
     try:
@@ -54,10 +54,12 @@ for index in range(len(distance.first_truck_index())):
 
 
 #update the delivery_start time of packages on second_truck
+# O(N)
 for idx, value in enumerate(package_data_reader.get_second_delivery()):
     package_data_reader.get_second_delivery()[idx][9] = second_truck_leave_time[0]
     second_delivery.append(package_data_reader.get_second_delivery()[idx])
-
+# this for loop compares the addresses on truck two to the list of addresses and adds the address index to the list
+# O(N^2)
 try:
     second_count = 0
     for k in second_delivery:
@@ -72,8 +74,8 @@ except IndexError:
 distance.evaluate_shortest_distance(second_delivery, 2, 0)
 second_truck_total_distance = 0
 
-# this for loop takes the values in the first truck and runs them through the distance functions in the Distances.py file
-# Space-time complexity is O(N)
+# this for loop takes the values in the second truck and runs them through the distance functions in the Distances.py file
+# O(N)
 second_truck_package_id = 0
 for index in range(len(distance.second_truck_index())):
     try:
@@ -87,10 +89,13 @@ for index in range(len(distance.second_truck_index())):
     except IndexError:
         pass
 
+#update the delivery_start time of packages on final_truck
+#O(N)
 for idx, value in enumerate(package_data_reader.get_last_delivery()):
     package_data_reader.get_last_delivery()[idx][9] = final_truck_leave_time[0]
     third_delivery.append(package_data_reader.get_last_delivery()[idx])
-
+# this for loop compares the addresses on truck three to the list of addresses and adds the address index to the list
+# O(N^2)
 try:
     third_count = 0
     for k in third_delivery:
@@ -106,8 +111,8 @@ except IndexError:
 distance.evaluate_shortest_distance(third_delivery, 3, 0)
 third_truck_total_distance = 0
 
-# this for loop takes the values in the first truck and runs them through the distance functions in the Distances.py file
-# Space-time complexity is O(N)
+# this for loop takes the values in the final truck and runs them through the distance functions in the Distances.py file
+# O(N)
 third_truck_package_id = 0
 for index in range(len(distance.third_truck_index())):
     try:

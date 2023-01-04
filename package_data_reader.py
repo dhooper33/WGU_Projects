@@ -10,7 +10,8 @@ with open('./delivery_data/WGUPSpackage_data.csv') as packagefile:
     second_truck = [] # second truck delivery
     last_truck = [] # final truck delivery
 
-    # Insert values from csv file into key/value pairs of the hash table -> O(n)
+    # Insert values from csv file into key/value pairs of the hash table 
+    # O(n)
     for row in package_data:
         package_id = row[0]
         package_address = row[1]
@@ -56,22 +57,28 @@ with open('./delivery_data/WGUPSpackage_data.csv') as packagefile:
         # Insert value into the hash table
         package_map.add(package_id, value)
 
-    # Get packages on the first delivery -> O(1)
+    # Get packages on the first delivery
+    # O(1)
     def get_first_delivery():
         return first_truck
 
-    # Get packages on the second delivery -> O(1)
+    # Get packages on the second delivery
+    # O(1)
     def get_second_delivery():
         return second_truck
 
-    # Get packages on the final delivery -> O(1)
+    # Get packages on the last delivery
+    # O(1)
     def get_last_delivery():
         return last_truck
 
-    # Get full list of packages -> O(1)
+    # Get full list of packages
+    # O(1)
     def get_hash_map():
         return package_map
 
+    #Determines the total numebr of packages being delivered
+    #O(N)
     def number_of_packages():
         total_packages = len(first_truck) + len(second_truck) + len(last_truck)
         return (total_packages)
