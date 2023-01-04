@@ -8,7 +8,8 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     destination_name_csv = list(csv.reader(destinationcsv, delimiter=','))
 
 
-# Calculate the total distance from a list of row/column values -> O(1)
+# Calculate the total distance from a list of row/column values
+# O(1)
     def evaluate_distance(row_value, column_value, total):
         distance = distance_csv[row_value][column_value]
         if distance == '':
@@ -17,7 +18,8 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
         total += float(distance)
         return total
 
-# Calculate the current distance from row/column values -> O(1)
+# Calculate the current distance from row/column values
+# O(1)
     def evaluate_current_distance(row_value, column_value):
         distance = distance_csv[row_value][column_value]
         if distance == '':
@@ -28,7 +30,8 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     second_time_list = ['9:10:00']
     third_time_list = ['11:00:00']
 
-    # Calculate total distance for a given truck based on its distance divied by the 18 mph average speed contraint for each truck -> O(n)
+    # Calculate total distance for a given truck based on its distance divied by the 18 mph average speed contraint for each truck 
+    # O(n)
     def get_time(distance, truck_list):
         new_time = distance / 18
         distance_in_minutes = '{0:02.0f}:{1:02.0f}'.format(
@@ -42,11 +45,12 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
                                         minutes=int(mins), seconds=int(secs))
         return total
     
-   # Get package address data -> O(n)
+   # Get package address data 
+   # O(n)
     def evaluate_address():
         return destination_name_csv
 
-        # these lists represent the sorted trucks that are put in order of efficiency in the function below
+    # these lists represent the sorted trucks that are put in order of efficiency in the function below
     first_truck = []
     first_truck_indices = []
     second_truck = []
@@ -54,33 +58,28 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     third_truck = []
     third_truck_indices = []
 
-    # NEED TO UPDATE ALL OF THIS:
-    # The following algorithm uses the 'greedy approach'. This is
-    # because the algorithm uses a recursive technique to determine the
-    # best location to visit next based on the current location. 
+    # The algoritm below applies a 'greedy approach" by using a 
+    # recursive technique to utilize the current location to 
+    # determine the best location to visit next
 
-    # This algorithm contains 3 parameters:
+    # This algorithm contains thre objects:
     # 1. List of packages
     # 2. Truck number
     # 3. Current location of the truck
 
-    # The purpose of the first for loop is to find the shortest distance
-    # to the next location. The lowest_value will continually change until
-    # a minimum value is found. 
+    # the first for loop will find the shortest distance to the next location. 
+    # The shortest_distance variable will continually updated until the lowest value is found. 
 
-    # The second for loop dictates what happens when the lowest_value has
-    # been determined. Conditionally statements check to see which truck
-    # the package is associated with. Values are then appended to the 
-    # appropriate truck lists. The current package is taken out of the list
-    # and the current location moves to the next optimal location
+    # The second for loop declares what to do after the shortest_distance has been determined. 
+    # The conditionally statements check to see which truck the package is on and values are 
+    # then appended to the corresponding truck lists. That package is then removed the list
+    # and the current_truck_location moves to the next optimal location
     # determined from the first loop. Lastly, a recursive call is made
-    # for the next location and shortened list. Recursive calls will
-    # continually be made until the base case is called, which will
+    # for the next location and the new list of packages. Recursive calls will
+    # continually be made until there are no packages left which will
     # end the function and return the now empty list. 
 
-    # Base Case: Length of the list is False, or zero. 
-
-    # Space-Time Complexity -> O(n^2)
+    #  O(n^2)
 
     def evaluate_shortest_distance(truck_list, truck_num, current_truck_location):
         if not len(truck_list):
@@ -122,22 +121,28 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     second_truck_indices.insert(0, '0')
     third_truck_indices.insert(0, '0')
 
-    # The following are all helper functions to return a desired value -> O(1)
+    # The following are all helper functions to return a desired value 
+    # O(1)
     def first_truck_index():
         return first_truck_indices
 
+    # O(1)
     def first_truck_list():
         return first_truck
 
+    # O(1)
     def second_truck_index():
         return second_truck_indices
 
+    # O(1)
     def second_truck_list():
         return second_truck
 
+    # O(1)
     def third_truck_index():
         return third_truck_indices
 
+    # O(1)
     def third_truck_list():
         return third_truck
 

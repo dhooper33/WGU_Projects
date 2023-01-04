@@ -1,4 +1,4 @@
-#Devon Hooper Student ID #: 
+#Devon Hooper Student ID #: 000875101
 
 from package_data_reader import get_hash_map
 from package_data_reader import number_of_packages
@@ -28,6 +28,7 @@ while user_input != 'exit':
             (hrs,mins,secs) = user_time_input.split(":")
             user_time_input_converted = datetime.timedelta(hours=int(hrs), minutes=(int(mins)), seconds=(int(secs)))
         
+            # O(N^2)       
             for count in range(1,41):
                 try:
                     departure_time = get_hash_map().get(str(count))[9]
