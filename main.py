@@ -10,6 +10,9 @@ class Main:
     print("Welcome to the WGUPS Package delivery system!")
     print("*" * 25)
     print(f'All trucks routes were completed in {packages.total_distance():.2f} miles.\n')
+    print(f'Truck 1 traveled a total distanced of: {round(packages.first_truck_total_distance, 1)}\n')
+    print(f'Truck 2 traveled a total distanced of: {round(packages.second_truck_total_distance, 1)}\n')
+    print(f'Truck 3 traveled a total distanced of: {round(packages.third_truck_total_distance, 1)}\n')
 
 print("""
 Please select an option below to begin or type 'exit' at any time to leave the system:
@@ -152,3 +155,5 @@ while user_input != 'exit':
     else:
         print('Invalid entry, please try again!')
         exit()
+
+        

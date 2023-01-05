@@ -58,11 +58,11 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     third_truck = []
     third_truck_indices = []
 
-    # The algoritm below applies a 'greedy approach" by using a 
+    # The algorithm below applies a 'greedy approach" by using a 
     # recursive technique to utilize the current location to 
     # determine the best location to visit next
 
-    # This algorithm contains thre objects:
+    # This algorithm contains three objects:
     # 1. List of packages
     # 2. Truck number
     # 3. Current location of the truck

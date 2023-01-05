@@ -130,7 +130,7 @@ def total_distance():
     total_distance = first_truck_total_distance + second_truck_total_distance + third_truck_total_distance
     return total_distance
 
-
+print(first_truck_total_distance)
 
 
 
