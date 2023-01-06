@@ -51,6 +51,7 @@ while user_input != 'exit':
                     #display all packages current info
                     print(
                         f'Package ID: {get_hash_map().get(str(count))[0]}, '
+                        f'Required delivery time: {get_hash_map().get(str(count))[6]}, '
                         f'Package Staus: {get_hash_map().get(str(count))[10]}'
                     )
                 # Determine which packages have left but have not been delivered
@@ -62,6 +63,7 @@ while user_input != 'exit':
                         # Print package's current info
                         print(
                             f'Package ID: {get_hash_map().get(str(count))[0]}, '
+                            f'Required delivery time: {get_hash_map().get(str(count))[6]}, '
                             f'Delivery status: {get_hash_map().get(str(count))[10]}'
                             )
                     # Determine which packages have already been delivered
@@ -72,6 +74,7 @@ while user_input != 'exit':
                         # Print package's current info
                         print(
                             f'Package ID: {get_hash_map().get(str(count))[0]}, '
+                            f'Required delivery time: {get_hash_map().get(str(count))[6]}, '
                             f'Delivery status: {get_hash_map().get(str(count))[10]}'
                             )
         except IndexError:
