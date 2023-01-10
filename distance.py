@@ -112,12 +112,12 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
                     evaluate_shortest_distance(truck_list, 3, current_truck_location)
    
  
-    # Insert 0 for the first index of each index list
+    # Insert 0 for the first index of each index list so that all will start at the hub
     first_truck_optimal_indices_list.insert(0, '0')
     second_truck_optimal_indices_list.insert(0, '0')
     third_truck_optimal_indices_list.insert(0, '0')
 
-    # The following are all helper functions to return a desired value 
+    # Helpful function for referencing 
     # O(1)
     def first_truck_optimized_index():
         return first_truck_optimal_indices_list

@@ -1,8 +1,3 @@
-class hash_table:
-    def __init__(self, key, item):
-        self.key = key
-        self.item = item
-
 class hash_map:
         def __init__(self, initial_capacity=10):
         # O(1)
