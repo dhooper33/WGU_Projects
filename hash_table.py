@@ -1,11 +1,10 @@
-class HashTableEntry:
+class hash_table:
     def __init__(self, key, item):
         self.key = key
         self.item = item
 
-class HashMap:
+class hash_map:
         def __init__(self, initial_capacity=10):
-        # initialize the hash table with empty bucket list entries.
         # O(1)
                 self.map = []
                 for i in range(initial_capacity):

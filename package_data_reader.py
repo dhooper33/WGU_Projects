@@ -5,74 +5,87 @@ import hash_table
 with open('./delivery_data/WGUPSpackage_data.csv') as packagefile:
     package_data = csv.reader(packagefile, delimiter=',')
 
-    package_map = hash_table.HashMap()  # Create an instance of HashMap class
-    first_truck = []  # first truck delivery
-    second_truck = [] # second truck delivery
-    last_truck = [] # final truck delivery
+    #Create delivery trucks
+    first_delivery_truck = []
+    second_delivery_truck = []
+    third_delivery_truck = []
 
-    # Insert values from csv file into key/value pairs of the hash table 
-    # O(n)
-    for row in package_data:
-        package_id = row[0]
-        package_address = row[1]
-        city = row[2]
-        state = row[3]
-        zip = row[4]
-        delivery_requirement = row[5]
-        package_weight = row[6]
-        special_note = row[7]
-        delivery_start = ''
-        address_location = ''
-        delivery_status = 'At hub'
+    #create hash map instance for the package data
+    package_map = hash_table.hash_map()
+    
+    #associate data in column to a variable
+    for column in package_data:
+        package_id = column[0]
+        delivery_address = column[1]
+        delivery_deadline = column[5]
+        delivery_city = column[2]
+        delivery_state = column [3]
+        delivery_zip = column[4]
+        package_weight = column[6]
+        delivery_requirements = column[7]
+        #extra items to add to each entry for package tracking
+        departure_time = ''
+        delivery_status = 'At Hub'
 
-        value = [package_id, address_location, package_address, city, state, zip, delivery_requirement, package_weight, 
-            special_note, delivery_start, delivery_status]
+        #place all column data into one value list to use as part of the key/value pair for the hash table
+        value = [package_id, #value[0]
+                delivery_address, #value[1]
+                delivery_deadline, #value[2]
+                delivery_city, #value[3]
+                delivery_zip, #value[4]
+                package_weight, #value[5]
+                delivery_requirements, #value[6]
+                departure_time, #value[7]
+                delivery_status, #value[8]
+                delivery_state]
 
-        #Conditional statements to determine which truck a package should be located and 
-        #put these packages into a nested list for quick indexing
+        #Creating conditional statments to sort trucks and determine which packages should go on each truck
+        #based on delivery deadlines and requirements
 
-        # First truck's first delivery
-        if value[6] != 'EOD':
-            if 'Must' in value[8] or 'None' in value[8]:
-                first_truck.append(value)
+        #ensures that packages that have a set delivery time are on the first truck along with any 
+        #packages that have to be delivered together
+        if value[2] != 'EOD':
+            if 'Must' in value[6] or 'None' in value[6]:
+                first_delivery_truck.append(value)
 
         #ensures the package 19 is on the first truck with the packages it must be delivered with
         if value[0] == "19" :
-            first_truck.append(value)
+            first_delivery_truck.append(value)
 
-        # Second truck's delivery
-        if 'Can only be' in value[8] or 'Delayed' in value[8]:
-            second_truck.append(value)
+        #ensures that packages that can only be on truck 2 and any delayed packages are
+        #on the second delivery truck
+        if 'Can only be' in value[6] or 'Delayed' in value[6]:
+            second_delivery_truck.append(value)
         
-       # Correct incorrect package detail 
-        if 'Wrong address listed' in value[8]:
-            value[2] = '410 S State St'
-            value[5] = '84111'
-            last_truck.append(value)
+       # Update incorrect package information
+        if 'Wrong address listed' in value[6]:
+            value[1] = '410 S State St'
+            value[4] = '84111'
+            third_delivery_truck.append(value)
 
-        # Check remaining packages
-        if value not in first_truck and value not in second_truck and value not in last_truck:
-            second_truck.append(value) if len(second_truck) < len(last_truck) else last_truck.append(value)
-
-        # Insert value into the hash table
+        # Check remaining packages are loaded while trying to split the load between the second and third delivery trucks
+        if value not in first_delivery_truck and value not in second_delivery_truck and value not in third_delivery_truck:
+            second_delivery_truck.append(value) if len(second_delivery_truck) < len(third_delivery_truck) else third_delivery_truck.append(value)
+        
+        # Insert key and value into the hash table
         package_map.add(package_id, value)
 
-    # Get packages on the first delivery
+    # returns the packages on the first delivery truck
     # O(1)
     def get_first_delivery():
-        return first_truck
+        return first_delivery_truck
 
-    # Get packages on the second delivery
+    # returns the packages on the second delivery truck
     # O(1)
     def get_second_delivery():
-        return second_truck
+        return second_delivery_truck
 
-    # Get packages on the last delivery
+    # returns the packages on the third delivery truck
     # O(1)
-    def get_last_delivery():
-        return last_truck
+    def get_third_delivery():
+        return third_delivery_truck
 
-    # Get full list of packages
+    # return full list of packages
     # O(1)
     def get_hash_map():
         return package_map
@@ -80,7 +93,6 @@ with open('./delivery_data/WGUPSpackage_data.csv') as packagefile:
     #Determines the total numebr of packages being delivered
     #O(N)
     def number_of_packages():
-        total_packages = len(first_truck) + len(second_truck) + len(last_truck)
+        total_packages = len(first_delivery_truck) + len(second_delivery_truck) + len(third_delivery_truck)
         return (total_packages)
 
-    

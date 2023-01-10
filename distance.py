@@ -1,29 +1,28 @@
 import csv
 import datetime
 
-#Reading data from CSV files
 with open('./delivery_data/WGUPSdistance_data.csv') as distancecsv:
-   distance_csv = list(csv.reader(distancecsv, delimiter=','))
+    distance_data_csv = list(csv.reader(distancecsv, delimiter=','))
 with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     destination_name_csv = list(csv.reader(destinationcsv, delimiter=','))
 
 
-# Calculate the total distance from a list of row/column values
+# Calculate the total distance
 # O(1)
     def evaluate_distance(row_value, column_value, total):
-        distance = distance_csv[row_value][column_value]
+        distance = distance_data_csv[row_value][column_value]
         if distance == '':
-            distance = distance_csv[column_value][row_value]
+            distance = distance_data_csv[column_value][row_value]
 
         total += float(distance)
         return total
 
-# Calculate the current distance from row/column values
+# Calculate the current distance
 # O(1)
     def evaluate_current_distance(row_value, column_value):
-        distance = distance_csv[row_value][column_value]
+        distance = distance_data_csv[row_value][column_value]
         if distance == '':
-            distance = distance_csv[column_value][row_value]
+            distance = distance_data_csv[column_value][row_value]
         return float(distance)
     # this is the time that the first truck leaves the hub
     first_time_list = ['8:00:00']
@@ -50,35 +49,31 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     def evaluate_address():
         return destination_name_csv
 
-    # these lists represent the sorted trucks that are put in order of efficiency in the function below
-    first_truck = []
-    first_truck_indices = []
-    second_truck = []
-    second_truck_indices = []
-    third_truck = []
-    third_truck_indices = []
+    # these lists will hold the optimized order of package deliveries from the function 
+    first_truck_optimized = []
+    second_truck_optimized = []
+    third_truck_optimized = []
 
-    # The algorithm below applies a 'greedy approach" by using a 
-    # recursive technique to utilize the current location to 
-    # determine the best location to visit next
+    #these lists will keep track of the distance_data indices for the optimized delivery list. 
+    first_truck_optimal_indices_list = []
+    second_truck_optimal_indices_list = []
+    third_truck_optimal_indices_list = []
 
-    # This algorithm contains three objects:
-    # 1. List of packages
-    # 2. Truck number
-    # 3. Current location of the truck
+    # The algorithm below applies a 'greedy approach" by using a recursive technique to utilize the current location to 
+    # determine the best location travel to next
 
-    # the first for loop will find the shortest distance to the next location. 
+    # This algorithm uses the list of packages on a truck, Truck number, and Current location of the truck as parameters
+
+    # the first for loop go throught to find the shortest distance to the next location in the package list. 
     # The shortest_distance variable will continually updated until the lowest value is found. 
 
     # The second for loop declares what to do after the shortest_distance has been determined. 
-    # The conditionally statements check to see which truck the package is on and values are 
-    # then appended to the corresponding truck lists. That package is then removed the list
+    # The conditionally statements check to see which truck the package is on and the values are 
+    # then appended to the corresponding truck lists. That package is then removed from the list
     # and the current_truck_location moves to the next optimal location
-    # determined from the first loop. Lastly, a recursive call is made
-    # for the next location and the new list of packages. Recursive calls will
-    # continually be made until there are no packages left which will
-    # end the function and return the now empty list. 
-
+    # that was determined from the first loop. 
+    # 
+    # a recursive call is made for the next location and the new list of packages. This will continue until all packages have been delivered.
     #  O(n^2)
 
     def evaluate_shortest_distance(truck_list, truck_num, current_truck_location):
@@ -98,51 +93,54 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
         for idx in truck_list:
             if evaluate_current_distance(current_truck_location, int(idx[1])) == shortest_distance:
                 if truck_num == 1:
-                    first_truck.append(idx)
-                    first_truck_indices.append(idx[1])
+                    first_truck_optimized.append(idx)
+                    first_truck_optimal_indices_list.append(idx[1])
                     truck_list.pop(truck_list.index(idx))
                     current_truck_location = location
                     evaluate_shortest_distance(truck_list, 1, current_truck_location)
                 elif truck_num == 2:
-                    second_truck.append(idx)
-                    second_truck_indices.append(idx[1])
+                    second_truck_optimized.append(idx)
+                    second_truck_optimal_indices_list.append(idx[1])
                     truck_list.pop(truck_list.index(idx))
                     current_truck_location = location
                     evaluate_shortest_distance(truck_list, 2, current_truck_location)
                 elif truck_num == 3:
-                    third_truck.append(idx)
-                    third_truck_indices.append(idx[1])
+                    third_truck_optimized.append(idx)
+                    third_truck_optimal_indices_list.append(idx[1])
                     truck_list.pop(truck_list.index(idx))
                     current_truck_location = location
                     evaluate_shortest_distance(truck_list, 3, current_truck_location)
-
+   
+ 
     # Insert 0 for the first index of each index list
-    first_truck_indices.insert(0, '0')
-    second_truck_indices.insert(0, '0')
-    third_truck_indices.insert(0, '0')
+    first_truck_optimal_indices_list.insert(0, '0')
+    second_truck_optimal_indices_list.insert(0, '0')
+    third_truck_optimal_indices_list.insert(0, '0')
 
     # The following are all helper functions to return a desired value 
     # O(1)
-    def first_truck_index():
-        return first_truck_indices
+    def first_truck_optimized_index():
+        return first_truck_optimal_indices_list
 
     # O(1)
     def first_truck_list():
-        return first_truck
+        return first_truck_optimized
 
     # O(1)
-    def second_truck_index():
-        return second_truck_indices
+    def second_truck_optimized_index():
+        return second_truck_optimal_indices_list
 
     # O(1)
     def second_truck_list():
-        return second_truck
+        return second_truck_optimized
 
     # O(1)
     def third_truck_index():
-        return third_truck_indices
+        return third_truck_optimal_indices_list
 
     # O(1)
     def third_truck_list():
-        return third_truck
+        return third_truck_optimized
+
+
 
