@@ -28,7 +28,7 @@ try:
         first_count += 1
 except IndexError:
     pass
-# calls the greedy algorithm tos sort the packages into the optimized order
+# calls the greedy algorithm to sort the packages into the optimized order
 distance.evaluate_shortest_distance(first_delivery, 1, 0)
 first_truck_total_distance = 0
 
@@ -66,7 +66,7 @@ try:
         second_count += 1
 except IndexError:
     pass
-# calls the greedy algorithm tos sort the packages into the optimized order
+# calls the greedy algorithm to sort the packages into the optimized order
 distance.evaluate_shortest_distance(second_delivery, 2, 0)
 second_truck_total_distance = 0
 
@@ -104,7 +104,7 @@ try:
 except IndexError:
     pass
 
-# calls the greedy algorithm tos sort the packages into the optimized order
+# calls the greedy algorithm to sort the packages into the optimized order
 distance.evaluate_shortest_distance(third_delivery, 3, 0)
 third_truck_total_distance = 0
 
@@ -113,9 +113,7 @@ third_truck_total_distance = 0
 third_truck_package_id = 0
 for index in range(len(distance.third_truck_index())):
     try:
-        # calculate the total distance of the truck
         third_truck_total_distance = distance.evaluate_distance(int(distance.third_truck_index()[index]), int(distance.third_truck_index()[index + 1]), third_truck_total_distance)
-        # calculate the distance of each package along the route
         deliver_package = distance.get_time(distance.evaluate_current_distance(int(distance.third_truck_index()[index]), int(distance.third_truck_index()[index + 1])), final_truck_leave_time)
         distance.third_truck_list()[third_truck_package_id][8] = (str(deliver_package))
         package_data_reader.get_hash_map().update(int(distance.third_truck_list()[third_truck_package_id][0]), third_delivery)

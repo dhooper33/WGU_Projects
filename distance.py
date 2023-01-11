@@ -7,7 +7,7 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     destination_name_csv = list(csv.reader(destinationcsv, delimiter=','))
 
 
-# Calculate the total distance
+# used to find total distance of a truck
 # O(1)
     def evaluate_distance(row_value, column_value, total):
         distance = distance_data_csv[row_value][column_value]
@@ -17,19 +17,16 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
         total += float(distance)
         return total
 
-# Calculate the current distance
+# used to find the current distance that a truck has traveled
 # O(1)
     def evaluate_current_distance(row_value, column_value):
         distance = distance_data_csv[row_value][column_value]
         if distance == '':
             distance = distance_data_csv[column_value][row_value]
         return float(distance)
-    # this is the time that the first truck leaves the hub
-    first_time_list = ['8:00:00']
-    second_time_list = ['9:10:00']
-    third_time_list = ['11:00:00']
 
-    # Calculate total distance for a given truck based on its distance divied by the 18 mph average speed contraint for each truck 
+
+    # uses distance of truck divied by the 18 mph average speed contraint to updated trucks travel times
     # O(n)
     def get_time(distance, truck_list):
         new_time = distance / 18
@@ -44,7 +41,7 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
                                         minutes=int(mins), seconds=int(secs))
         return total
     
-   # Get package address data 
+   # helpful to call the package address data 
    # O(n)
     def evaluate_address():
         return destination_name_csv
@@ -117,7 +114,7 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     second_truck_optimal_indices_list.insert(0, '0')
     third_truck_optimal_indices_list.insert(0, '0')
 
-    # Helpful function for referencing 
+    # Helpful function to call on for obtaining data  
     # O(1)
     def first_truck_optimized_index():
         return first_truck_optimal_indices_list

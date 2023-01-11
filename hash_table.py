@@ -54,6 +54,6 @@ class hash_map:
                                         print(pair[1])
                                         return True
                 else:
-                        print(f'There was an error with updating on key: {key}')
+                        print(f'There was an error updating key: {key}')
 
 
