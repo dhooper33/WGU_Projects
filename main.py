@@ -57,6 +57,9 @@ while user_input != 'exit':
                         f'Package Staus: {get_hash_map().get(str(count))[8]}\n '
                         f'\tDelivery Note: {get_hash_map().get(str(count))[7]}'
                         )
+                    #resets data values to allow for another search
+                    get_hash_map().get(str(count))[8] = package_status
+                    get_hash_map().get(str(count))[7] = departure_time
                 # determine which packages have left the hub but have not been delivered
                 elif departure_time_converted <= user_time_input_converted:
                     if user_time_input_converted < package_status_converted:
@@ -70,6 +73,9 @@ while user_input != 'exit':
                             f'Package Staus: {get_hash_map().get(str(count))[8]}\n '
                             f'\tDelivery Note: {get_hash_map().get(str(count))[7]}'
                             )
+                        #resets data values to allow for another search
+                        get_hash_map().get(str(count))[8] = package_status
+                        get_hash_map().get(str(count))[7] = departure_time
                     # determine which packages have already been delivered
                     else:
                         get_hash_map().get(str(count))[8] = 'Delivered at ' + package_status
@@ -80,7 +86,9 @@ while user_input != 'exit':
                             f'\tRequired delivery time: {get_hash_map().get(str(count))[2]} \n\t'
                             f'Package Staus: {get_hash_map().get(str(count))[8]} '
                             )
-            
+                    #resets data values to allow for another search
+                    get_hash_map().get(str(count))[8] = package_status
+                    get_hash_map().get(str(count))[7] = departure_time
         # Presents users with options for what they would like to do next
             print('-'*90)
             print("""
@@ -176,13 +184,12 @@ Please select an option below to begin or type 'exit' to leave the system:
                         f'Truck status: {get_hash_map().get(str(count))[7]}\n'
                         f'Delivery status: {get_hash_map().get(str(count))[8]}\n'
                         '***************************************************' 
-                        )
-            
+                        )            
         # Presents users with options for what they would like to do next
             print('-'*90)
             print("""
 Please select an option below to begin or type 'exit' to leave the system:
-    1. Search for another time
+    1. Search for another package
     2. Return to main menu
 
 *** Invalid selections will automatically return you to the main menu ***
@@ -200,9 +207,6 @@ Please select an option below to begin or type 'exit' to leave the system:
         except ValueError:
             if count == 'exit':
                 break
-            # elif user_time_input == 'exit':
-            #     print('\nHave a great day!\n')
-            #     break 
             else:
                 print('\nInvalid entry, please try again!\n')
         except TypeError:
