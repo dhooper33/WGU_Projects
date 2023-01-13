@@ -51,7 +51,7 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     second_truck_optimized = []
     third_truck_optimized = []
 
-    #these lists will keep track of the distance_data indices for the optimized delivery list. 
+    # these lists will keep track of the distance_data indices for the optimized delivery list.
     first_truck_optimal_indices_list = []
     second_truck_optimal_indices_list = []
     third_truck_optimal_indices_list = []
@@ -61,8 +61,8 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
 
     # This algorithm uses the list of packages on a truck, Truck number, and Current location of the truck as parameters
 
-    # the first for loop go throught to find the shortest distance to the next location in the package list. 
-    # The shortest_distance variable will continually updated until the lowest value is found. 
+    # the first for loop will go through to find the shortest distance to the next location in the package list.
+    # The shortest_distance variable will continually update until the lowest value is found.
 
     # The second for loop declares what to do after the shortest_distance has been determined. 
     # The conditionally statements check to see which truck the package is on and the values are 
@@ -70,13 +70,12 @@ with open('./delivery_data/WGUPSdestination_name_data.csv') as destinationcsv:
     # and the current_truck_location moves to the next optimal location
     # that was determined from the first loop. 
     # 
-    # a recursive call is made for the next location and the new list of packages. This will continue until all packages have been delivered.
-    #  O(n^2)
+    # a recursive call is made for the next location and the new list of packages. This will continue until all packages
+    # have been delivered.
+    # O(n^2)
 
     def evaluate_shortest_distance(truck_list, truck_num, current_truck_location):
-        if not len(truck_list):
-            return truck_list
-
+        
         shortest_distance = 50.0
         location = 0
 
